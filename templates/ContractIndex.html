@@ -1,0 +1,165 @@
+{% extends "template.html" %}
+{% block head %}
+
+{% endblock %}
+{% block sidebar %}
+<div class="sidebar" data-color="blue" data-image="../static/img/sidebar-1.jpg">
+	<!--
+		Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+		Tip 2: you can also add an image using data-image tag
+	-->
+	<div class="logo">
+		<a href="http://www.creative-tim.com" class="simple-text">
+			Creative Tim
+		</a>
+	</div>
+	<div class="sidebar-wrapper">
+		<ul class="nav">
+			<li>
+				<a href="/ContractList">
+					<i class="material-icons">dashboard</i>
+					<p>合同列表</p>
+				</a>
+			</li>
+			{%- if not id -%} 
+			<li class="active" >
+			{% endif %}		
+			{%- if id -%} 
+			<li>
+			{% endif %}
+				<a href="/createIndex">
+					<i class="material-icons">person</i>
+					<p>创建合同</p>
+				</a>
+			</li>
+			{%- if id -%}
+			<li class="active">
+				<a href="/content/{{id}}">
+					<i class="material-icons">person</i>
+					<p>合同内容</p>
+				</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block main_panel %}
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" data-background-color="blue">
+							<h4 class="title">创建合同</h4>
+							<p class="category">合同基本信息</p>
+						</div>
+						<div class="card-content table-responsive">
+							<table class="table">
+								<thead class="text-primary">
+									<th>合同名</th>
+									<th>甲方</th>
+									<th>乙方</th>
+									<th>有效期</th>
+								</thead>
+								<tbody>
+									{%- if id -%}
+									<tr>
+										<td><input id="contract_name" value="{{contract[0]}}" /></td>
+										<td><input id="Obligor" value="{{contract[1]}}" /></td>
+										<td><input id="creditor" value="{{contract[2]}}" /></td>
+										<td><input id="none" value="{{contract[3]}}" /></td>
+									</tr>
+									{% endif %}
+									{%- if not id -%}
+									<tr>
+										<td><input id="contract_name" /></td>
+										<td><input id="Obligor" /></td>
+										<td><input id="creditor" /></td>
+										<td><input id="none" /></td>
+									</tr>
+									{% endif %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-header" data-background-color="blue">
+							<h4 class="title">创建合同</h4>
+							<p class="category">条款内容
+								{%- if not id -%}
+								<a href="javascript:void(0);" onclick="TermAdd()">点此添加新的条款</a>
+								{%- endif -%}
+							</p>
+						</div>
+						<div class="card-content table-responsive">
+							<table class="table" id="Terms">
+								<thead class="text-primary">
+									<th></th>
+									<th>债务人</th>
+									<th>债务人</th>
+									<th>前提</th>
+									<th>结果函数</th>
+									<th>有效期1</th>
+									<th>有效期2</th>
+								</thead>
+								<tbody>
+									{%- if not id -%}
+									<tr>
+										<td>Term 1</td>
+										<td><input id="Obligor1" /></td>
+										<td><input id="creditor1" /></td>
+										<td><input id="premise1" /></td>
+										<td><input id="res1" /></td>
+										<td><input id="tc_act1" /></td>
+										<td><input id="tc_bas1" /></td>
+									</tr>
+									{%- endif -%}
+									{%- if id -%}
+									{% for term in contract[4]%}
+									<tr>
+										<td>Term {{loop.index}}</td>
+										<td><input id="Obligor{{loop.index}}" value="{{term['Obligor']}}" /></td>
+										<td><input id="creditor{{loop.index}}" value="{{term['creditor']}}" /></td>
+										<td><input id="premise{{loop.index}}" value="{{term['premise']}}" /></td>
+										<td><input id="res{{loop.index}}" value="{{term['res']}}" /></td>
+										<td><input id="tc_act{{loop.index}}" value="{{term['tc_act']}}" /></td>
+										<td><input id="tc_bas{{loop.index}}" value="{{term['tc_bas']}}" /></td>
+									</tr>
+									{% endfor %}
+									{%- endif -%}
+								</tbody>
+							</table>
+							{%- if not id -%}
+							<button type="button" onclick="CreateContract()">提交</button>
+							{%- endif -%}
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="../static/js/contractindex.js" type="text/javascript" charset="utf-8"></script>
+<script text="type/javascript">
+	var count = 2;
+	function TermAdd() {
+		innerHtml = "<tr><td>Term " + count + "</td>" +
+			"<td><input id=\"Obligor" + count + "\" /></td >" +
+			"<td><input id=\"creditor" + count + "\"/></td>" +
+			"<td><input id=\"premise" + count + "\"/></td>" +
+			"<td><input id=\"res" + count + "\"/></td>" +
+			"<td><input id=\"tc_act" + count + "\"/></td>" +
+			"<td><input id=\"tc_bas" + count + "\"/></td></tr>";
+		$("#Terms").append(innerHtml);
+		count++;
+		console.log(count);
+	}
+</script>
+{% endblock %}

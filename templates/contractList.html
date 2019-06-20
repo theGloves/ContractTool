@@ -1,0 +1,71 @@
+{% extends "template.html" %}
+{% block head %}
+{% endblock %}
+{% block sidebar %}
+<div class="sidebar" data-color="blue" data-image="../static/img/sidebar-1.jpg">
+	<!--
+		Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+		Tip 2: you can also add an image using data-image tag
+	-->
+	<div class="logo">
+		<a href="http://www.creative-tim.com" class="simple-text">
+			Creative Tim
+		</a>
+	</div>
+	<div class="sidebar-wrapper">
+		<ul class="nav">
+			<li  class="active">
+				<a href="/ContractList">
+					<i class="material-icons">dashboard</i>
+					<p>合同列表</p>
+				</a>
+			</li>
+			<li>
+				<a href="/createIndex">
+					<i class="material-icons">person</i>
+					<p>创建合同</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block main_panel %}
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" data-background-color="blue">
+							<h4 class="title">合同列表</h4>
+							<p class="category">当前服务器上的所有合同</p>
+						</div>
+						<div class="card-content table-responsive">
+							<table class="table">
+								<thead class="text-primary">
+									<th>id</th>
+									<th>合同名</th>
+									<th>操作</th>
+								</thead>
+								<tbody>
+									{% for contract in contractList %}
+									<tr>
+										<td>{{contract[0]}}</td>
+										<td><a href="/content/{{contract[0]}}">{{contract[1]}}</a></td>
+										<td><a href="/content/{{contract[0]}}">查看合约内容</a>&nbsp;&nbsp;&nbsp;<a
+												href="/DGA/{{contract[0]}}">查看状态机</a></td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

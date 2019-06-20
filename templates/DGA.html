@@ -1,0 +1,203 @@
+{% extends "template.html" %}
+{% block head %}
+<style id="css">
+	#right {
+		width: 78%;
+		height: 550px;
+		margin: 0 auto;
+		margin-left: 50px;
+		margin-right: 0px;
+		border-style: solid;
+		border-width: 5px;
+		border-color: rgba(30, 144, 255, 0.7);
+		border-radius: 30px;
+		font-family: "黑体";
+		font-size: 16px;
+		display: inline-block;
+		overflow: scroll;
+	}
+
+	button {
+		width: 180px;
+	}
+
+	.table th {
+		text-align: center;
+		vertical-align: middle !important;
+	}
+
+	#table td {
+		text-align: left;
+	}
+
+	text {
+		font-weight: 300;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+		font-size: 14px;
+	}
+
+	body {}
+
+	.edgePath path {
+		stroke: #333;
+		fill: #333;
+		stroke-width: 1.5px;
+	}
+
+	.node text {
+		pointer-events: none;
+		color: "#333";
+	}
+
+	/* This styles the title of the tooltip */
+	.tipsy .name {
+		font-size: 1.5em;
+		font-weight: bold;
+		color: #60b1fc;
+		margin: 0;
+	}
+
+	table {
+		border-spacing: 0;
+	}
+
+	table td {
+		padding: 7px;
+	}
+
+	/* This styles the body of the tooltip */
+	.tipsy .description {
+		font-size: 1.3em;
+		font-weight: bold;
+		margin: 0;
+	}
+
+	.node rect {
+		stroke: #333;
+		fill: #fff;
+		stroke-width: 1.5px;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="../static/js/diag.js"></script>
+{% endblock %}
+{% block sidebar %}
+<div class="sidebar" data-color="blue" data-image="../static/img/sidebar-1.jpg">
+	<!--
+		Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+		Tip 2: you can also add an image using data-image tag
+	-->
+	<div class="logo">
+		<a href="http://www.creative-tim.com" class="simple-text">
+			Creative Tim
+		</a>
+	</div>
+	<div class="sidebar-wrapper">
+		<ul class="nav">
+			<li>
+				<a href="/ContractList">
+					<i class="material-icons">dashboard</i>
+					<p>合同列表</p>
+				</a>
+			</li>
+			<li>
+				<a href="/createIndex">
+					<i class="material-icons">person</i>
+					<p>创建合同</p>
+				</a>
+			</li>
+			<li class="active">
+				<a href="/DGA/{{contractId}}" >
+					<i class="material-icons">person</i>
+					<p>状态机</p>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block main_panel %}
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" data-background-color="blue">
+							<h4 class="title">Simple Table</h4>
+							<p class="category">Here is a subtitle for this table</p>
+						</div>
+						<div class="card-content table-responsive">
+							<table class="table">
+								<thead class="text-primary">
+									<th>Name</th>
+									<th>Country</th>
+									<th>City</th>
+									<th>Salary</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Dakota Rice</td>
+										<td>Niger</td>
+										<td>Oud-Turnhout</td>
+										<td class="text-primary">$36,738</td>
+									</tr>
+									<tr>
+										<td>Minerva Hooper</td>
+										<td>Curaçao</td>
+										<td>Sinaai-Waas</td>
+										<td class="text-primary">$23,789</td>
+									</tr>
+									<tr>
+										<td>Sage Rodriguez</td>
+										<td>Netherlands</td>
+										<td>Baileux</td>
+										<td class="text-primary">$56,142</td>
+									</tr>
+									<tr>
+										<td>Philip Chaney</td>
+										<td>Korea, South</td>
+										<td>Overland Park</td>
+										<td class="text-primary">$38,735</td>
+									</tr>
+									<tr>
+										<td>Doris Greene</td>
+										<td>Malawi</td>
+										<td>Feldkirchen in Kärnten</td>
+										<td class="text-primary">$63,542</td>
+									</tr>
+									<tr>
+										<td>Mason Porter</td>
+										<td>Chile</td>
+										<td>Gloucester</td>
+										<td class="text-primary">$78,615</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+			            <div id="num-debug"></div>
+
+						<h3>graph test</h3>
+						<div id="DGAgraph">
+							<svg id="svgCanvas" width=1200 height=900>
+								<g /></svg>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<!-- dagre graph js Files -->
+<script src="../static/js/d3.min.js" charset="utf-8"></script>
+<script src="../static/js/dagre.min.js" type="text/javascript"></script>
+<script src="../static/js/dagre-d3.js"></script>
+<script text="type/javascript" id="js">
+
+</script>
+{% endblock %}
